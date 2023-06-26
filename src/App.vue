@@ -1,5 +1,19 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import {store} from './data/store';
+
+  export default {
+    name: 'home',
+
+    methods:{
+
+      getApi(){
+        console.log(store.apiUrl);
+      }
+    },
+    mounted(){
+      this.getApi();
+    }
+  }
 </script>
 
 <template>
