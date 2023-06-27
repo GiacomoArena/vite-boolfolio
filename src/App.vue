@@ -1,7 +1,11 @@
 <script>
-
+import Header from './components/Header.vue';
 export default {
   name: 'app',
+
+  components:{
+    Header
+  },
 
   data() {
     return {
@@ -13,6 +17,8 @@ export default {
 </script>
 
 <template>
+  <Header />
+
   <router-view></router-view>
 </template>
 
