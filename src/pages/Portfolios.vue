@@ -14,28 +14,43 @@ export default {
     }
   },
   methods: {
-    getApi(endpoint) {
+    getApi(endpoint) { 
       axios.get(endpoint).then(results => {
 
         this.portfolios = results.data.data
-        this.type = results.data.data.type
         this.technologies = results.data.data.technologies
         this.links = results.data.links
 
-        // console.log(this.portfolios);
+        //console.log(results.data);
+      })
+    },
+    getType() { 
+      axios.get(store.typeUrl).then(results => {
+        this.type = results.data
+        console.log( this.type);
       })
     }
+  },
+  gettypeid(id){
+    this.getApi(store.apiUrl +'/by-type/'+id)
   },
 
   mounted() {
     this.getApi(store.apiUrl);
+    this.getType();
   }
 }
 </script>
 
 <template>
   <div class="container card">
-    <h2>portfolios</h2>
+    <span>
+      <h2>portfolios</h2> 
+      <!-- <button v-for="item in type" :key="item.id" 
+      @click="gettypeid(item.id)">
+      {{ item.type }}
+    </button> -->
+    </span> 
 
     <ol class="list-group" v-for="item in portfolios" :key="item.id">
       <li class="list-group-item d-flex justify-content-between align-items-start">
