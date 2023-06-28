@@ -80,7 +80,7 @@ export default {
         <button class="btn my-btn" v-for="item in type" :key="item.id" @click="gettypeid(item.id)">
           {{ item.type }}
         </button>
-        <button class="btn my-btn" v-for="item in technologies" :key="item.id" @click="gettechid(item.id)">
+        <button class="btn my-btn2" v-for="item in technologies" :key="item.id" @click="gettechid(item.id)">
           {{ item.name }}
         </button>
       </div>
@@ -110,11 +110,14 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      .my-btn{
-        background-color: rgba(56, 35, 35, 0.788);
+      .my-btn,.my-btn2{
+        background-color: rgba(20, 48, 30, 0.788);
         color: white;
         width: 150px;
         margin: 5px;
+      }
+      .my-btn2{
+        background-color: rgb(95, 44, 44);
       }
     }
   }
