@@ -18,7 +18,6 @@ export default {
       axios.get(endpoint).then(results => {
 
         this.portfolios = results.data.data
-        this.technologies = results.data.data.technologies
         this.links = results.data.links
 
         //console.log(results.data);
@@ -30,14 +29,24 @@ export default {
         console.log(this.type);
       })
     },
+    getTech() {
+      axios.get(store.techUrl).then(results => {
+        this.technologies = results.data
+        console.log(this.technologies);
+      })
+    },
     gettypeid(id) {
       this.getApi(store.apiUrl + '/by-type/' + id)
+    },
+    gettechid(id) {
+      this.getApi(store.apiUrl + '/by-tech/' + id)
     },
   },
 
   mounted() {
     this.getApi();
     this.getType();
+    this.getTech();
   }
 }
 </script>
@@ -48,7 +57,7 @@ export default {
     <div class="main-container d-flex">
 
       <div class="left-container ">
-        <ol class="list-group" v-for="item in portfolios" :key="item.id">
+        <ol class="list-group m-1" v-for="item in portfolios" :key="item.id">
           <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
               <div class="fw-bold">{{ item.id }}-{{ item.title }}</div>
@@ -70,6 +79,9 @@ export default {
         </div>
         <button class="btn my-btn" v-for="item in type" :key="item.id" @click="gettypeid(item.id)">
           {{ item.type }}
+        </button>
+        <button class="btn my-btn" v-for="item in technologies" :key="item.id" @click="gettechid(item.id)">
+          {{ item.name }}
         </button>
       </div>
       
@@ -93,7 +105,7 @@ export default {
     }
     .right-container{
       overflow-y: auto;
-      height: 500px;
+      //height: 500px;
       width: 250px;
       display: flex;
       flex-direction: column;
