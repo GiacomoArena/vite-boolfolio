@@ -53,14 +53,16 @@ export default {
 
 <template>
   <div class="container card d-flex">
-    <h2>portfolios</h2>
+    <h2 class="m-3">Portfolios</h2>
     <div class="main-container d-flex">
 
       <div class="left-container ">
         <ol class="list-group m-1" v-for="item in portfolios" :key="item.id">
           <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-              <div class="fw-bold">{{ item.id }}-{{ item.title }}</div>
+              <div class="title-ctn">
+                <router-link :to="{name:'detail', params:{slug:item.slug}}">{{ item.id }}-{{ item.title }}</router-link>
+              </div>
               <span>{{ item.name }} {{ item.surname }}</span>
               <span class="badge bg-dark ms-3">{{ item.type.type }}</span>
               <span class="badge bg-secondary ms-3" v-for="(tech, i) in item.technologies" :key="i">{{ tech.name }}</span>
@@ -102,6 +104,16 @@ export default {
   .main-container{
     .left-container{
       width: 100%;
+      .title-ctn{
+        a{
+          text-decoration: none;
+          text-transform: none;
+          color: black;
+          &:hover{
+            color: rgb(61, 24, 24);
+          }
+        }
+      }
     }
     .right-container{
       overflow-y: auto;
