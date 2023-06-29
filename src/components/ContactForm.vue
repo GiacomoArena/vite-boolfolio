@@ -11,6 +11,7 @@ export default {
       email: '',
       message: '',
       errors: {},
+      success: false,
     }
   },
   methods: {
@@ -24,6 +25,8 @@ export default {
       axios.post(store.contactUrl, data)
         .then(result => {
           console.log(result.data.errors);
+          console.log(result.data.success);
+          this.success = result.data.success;
           if (result.data && result.data.errors) {
             this.errors = result.data.errors;
           } else {
@@ -37,7 +40,7 @@ export default {
 
 
 <template>
-  <form @submit.prevent="sendForm()">
+  <form @submit.prevent="sendForm()" v-if="!success">
     <div class="mb-3">
       <div class="mb-3">
         <label class="form-label">Name</label>
@@ -59,6 +62,10 @@ export default {
 
     <button type="submit" class="btn btn-dark m-3">Send</button>
   </form>
+
+  <div v-else class="badge bg-success">
+    <h1>Form submitted correctly!</h1>
+  </div>
 </template>
 
 
